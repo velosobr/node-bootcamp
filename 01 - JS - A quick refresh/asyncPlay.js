@@ -12,7 +12,7 @@ fetchData( text =>{
     
 })
 
-}, 2000)
+}, 2000 )
 
 
 console.log("Hello");
