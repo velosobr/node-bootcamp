@@ -1,26 +1,39 @@
 const http = require('http')
-
 const fs = require('fs')
 
 const server = http.createServer((req, res) => {
-  console.log(req.url, req.method, req.headers);
-  // process.exit();
   const url = req.url;
-  const method = req.url;
+  const method = req.method;
 
+  console.log("Esta é a URL: " + url);
 
   if (url === '/') {
+    console.log("entrou no log que eu queria");
 
-    res.write('<html>')
-    res.write('<head><title>My First server on node</title></head>')
-    res.write('<body><form action="/message" method="POST"><input type="text" name="message"></form>Hello, this is my first server made on Node.js</body>')
-    res.write('</html>')
+    res.write('<html>');
+    res.write('<head><title>Enter a message</title></head>');
+    res.write('<body><form action="/message" method="POST"><input type="text" name="message"><button type="submit">Send</button></form></body>');
+    res.write('</html>');
 
-    return res.end()
+    return res.end();
 
   }
 
   if (url === '/message' && method === 'POST') {
+    console.log("Mas o que eu queria era esse");
+
+    const body = [];
+    req.on('data', (chunk) => {
+
+      console.log('this is the: ' + chunk);
+
+      body.push(chunk)
+    })
+    req.on('end', () => {
+      const parsedBody = Buffer.concat(body).toString()
+      console.log(parsedBody);
+
+    })
     fs.writeFileSync('message.txt', 'DUMMY')
     res.statusCode = 302
     res.setHeader('Location', '/')
@@ -45,6 +58,6 @@ const server = http.createServer((req, res) => {
 
 });
 
-server.listen(3333)
+server.listen(4444)
 
 
