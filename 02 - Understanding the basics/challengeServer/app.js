@@ -30,7 +30,9 @@ const server = http.createServer((req, res) => {
 
   }
 
-  if (url === '/create-user' && method === 'POST')
+  if (url === '/create-user' && method === 'POST'){
+    
+  }
 })
 
 server.listen(4444)
