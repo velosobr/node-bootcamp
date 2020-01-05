@@ -8,7 +8,9 @@
  */
 
 const express = require('express')
-
+const main = require('./routes/main')
 const app = express()
+
+app.use(main)
 
 app.listen(4444)
